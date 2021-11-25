@@ -1,28 +1,17 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
-const theme = createTheme();
 
 export default function SignIn() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-    };
 
     return (
-        <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
                 <Grid
                     item
                     xs={false}
@@ -47,41 +36,31 @@ export default function SignIn() {
                             alignItems: 'center',
                         }}
                     >
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            <LockOutlinedIcon />
-                        </Avatar>
+
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <Box component="form" sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="name"
-                                label="Name"
-                                name="name"
-                                autoComplete="name"
+                                id="login"
+                                label="Login"
+                                name="login"
+                                autoComplete="login"
                                 autoFocus
                             />
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="surname"
-                                label="Surname"
-                                name="surname"
-                                autoComplete="surname"
+                                id="password"
+                                label="Password"
+                                name="password"
+                                autoComplete="password"
+                                type={"password"}
                                 autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="group"
-                                label="Group"
-                                id="group"
-                                autoComplete="group"
                             />
                             <Button
                                 type="submit"
@@ -95,6 +74,5 @@ export default function SignIn() {
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
     );
 }
