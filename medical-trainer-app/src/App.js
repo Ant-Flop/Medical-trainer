@@ -17,9 +17,7 @@ function App() {
         body: JSON.stringify({action: 1})
     })
         .then(response => response.text())
-        .then(response => {
-            console.log(response);
-        })
+        .then()
 
     const localStorageMethode = (state) => {
         const { user_id, login, name, surname, group, role } = state;
@@ -37,9 +35,7 @@ function App() {
     const access = (state) => {
         if(state.connect === true)
         localStorageMethode(state);
-        console.log(localStorage.getItem("connect"))
         setConnect(state.connect);
-        console.log(state.connect)
     }
 
     return (
