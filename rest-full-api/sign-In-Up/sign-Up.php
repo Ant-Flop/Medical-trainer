@@ -1,5 +1,5 @@
 <?php
-	include "conectar.php";
+	include "connectToDB.php";
     $conn = conectarDB();
 	
 	$password= "456";

@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Alert from "@mui/material/Alert";
 
-const URL_LOGIN = "http://localhost/Medical-trainer/rest-full-api/ws-login/login.php";
+const URL_LOGIN = "http://localhost/Medical-trainer/rest-full-api/sign-In-Up/sign-In.php";
 
 
 const sendData = async (url, data) => {
@@ -17,6 +17,7 @@ const sendData = async (url, data) => {
             'Accept': 'application/json'
         }
     });
+    /*console.log( response)*/
     return await response.json();
 }
 
@@ -31,11 +32,11 @@ export default function SignIn(props) {
             "user": refUser.current.value,
             "key": refKey.current.value
         };
-        console.log(data)
+        /*console.log(data)*/
         const requestJson = await sendData(URL_LOGIN, data).then();
-        console.log(requestJson);
+        /*console.log(requestJson);console.log(requestJson.connect);*/
 
-        props.access(requestJson.conectado);
+        props.access(requestJson);
         setError(requestJson.error);
     }
 
