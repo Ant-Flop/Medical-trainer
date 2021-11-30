@@ -2,13 +2,18 @@ import './App.css';
 import React, {useState} from "react";
 import {Combine} from "./Components/Login/Combine";
 import {Routing} from "./Components/Routing";
+import {Header} from "./Components/Layout/Header";
+import {Route, Routes} from "react-router";
+import {TestPage} from "./Components/MainPageStudent/TestPage";
+import {useSelector} from "react-redux";
+
 
 const URL_LOGIN = "http://localhost/medical-trainer/rest-full-api/session-storage.php";
 
 
 function App() {
 
-
+    const state = useSelector(state => state);
     fetch(URL_LOGIN, {
         method: "POST",
         header: {
@@ -28,6 +33,7 @@ function App() {
         localStorage.setItem('group', group);
         localStorage.setItem('role', role);
         localStorage.setItem('connect', 'true');
+        localStorage.setItem('route-student', 'greetings');
     }
 
 
@@ -38,9 +44,12 @@ function App() {
         setConnect(state.connect);
     }
 
+
     return (
         <div className="App">
-            {localStorage.getItem("connect") === "true" ? <Routing /> : <Combine access={access}/>}
+
+            {localStorage.getItem("connect") === "true" ? <><Header/><Routing state={state} /></> : <Combine access={access}/>}
+
         </div>
     );
 }
