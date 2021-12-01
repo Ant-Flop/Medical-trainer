@@ -3,15 +3,40 @@ import {Container} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
+import {TestPage} from "./TestPage";
+import {useDispatch} from "react-redux";
+import {getTestData, updateTestData} from "../../redux/reducers/TestDataReducer";
 
+const URL_DATA_TEST_UK = "http://localhost/medical-trainer/rest-full-api/test-data/test-data-uk.php";
 
-
-export const MainPageStudent = () => {
-
+export const MainPageStudent = (props) => {
+    const dispatch = useDispatch();
     const startTest = () => {
-        localStorage.setItem('route-student', '1');
+        localStorage.setItem('route-student', 'start-test');
+        const responseDataTest = () => {
+            return fetch(URL_DATA_TEST_UK, {
+                method: "POST",
+                header: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({action: 1})
+            })
+                .then((response) => {
+                    return response.json().then((data) => {
+                        return data;
+                    })
+                })
+
+
+        }
+        responseDataTest().then((data) => {
+            dispatch(updateTestData(data))
+            //console.log(data)
+            props.rerender();
+        })
         //window.location.assign('http://localhost:3000/test-start');
-        window.location.reload();
+        //window.location.reload();
+
     }
 
     return (

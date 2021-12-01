@@ -6,7 +6,7 @@ import {TestPage} from "./MainPageStudent/TestPage";
 import {MainPageAdministrator} from "./MainPageAdministrator/MainPageAdministrator";
 
 
-export const Routing = () => {
+export const Routing = (props) => {
     const role = localStorage.getItem('role');
 
 
@@ -16,8 +16,8 @@ export const Routing = () => {
         return (<MainPageTeacher/>)
     else if (role === "Student") {
         if (localStorage.getItem("route-student") === "greetings")
-            return (<MainPageStudent/>)
-        else if (localStorage.getItem("route-student") === "1")
+            return (<MainPageStudent rerender={props.rerender}/>)
+        else if (localStorage.getItem("route-student") === "start-test")
             return (<TestPage/>/*<Routes><Route path="/test-start" element={<TestPage/>}/></Routes>*/);
     }
     return <></>

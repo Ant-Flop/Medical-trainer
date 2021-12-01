@@ -3,13 +3,10 @@ import React, {useState} from "react";
 import {Combine} from "./Components/Login/Combine";
 import {Routing} from "./Components/Routing";
 import {Header} from "./Components/Layout/Header";
-import {Route, Routes} from "react-router";
-import {TestPage} from "./Components/MainPageStudent/TestPage";
-import {useSelector} from "react-redux";
 
 
 
-function App() {
+function App(props) {
 
     //const state = useSelector(state => state);
 
@@ -36,7 +33,7 @@ function App() {
 
     return (
         <div className="App">
-            {localStorage.getItem("connect") === "true" ? <><Header/><Routing /></> : <Combine access={access}/>}
+            {localStorage.getItem("connect") === "true" ? <><Header/><Routing rerender={props.rerender}/></> : <Combine access={access}/>}
         </div>
     );
 }

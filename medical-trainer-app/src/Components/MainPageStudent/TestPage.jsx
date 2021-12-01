@@ -1,49 +1,25 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import {Container} from "@mui/material";
 import {StackStages} from "./TestPageComponents/StagesStack";
 import {ChooseButton} from "./TestPageComponents/ChooseButton";
 import {Header} from "./TestPageComponents/Header";
 import {Question} from "./TestPageComponents/Question";
 import {Animation} from "./TestPageComponents/Animation";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getTestData, updateTestData} from "../../redux/reducers/TestDataReducer";
 
 const URL_DATA_TEST_UK = "http://localhost/medical-trainer/rest-full-api/test-data/test-data-uk.php";
 
 export const TestPage = () => {
-    const state = useSelector(state => state);
-
-    const responseDataTest = () => {
-        return fetch(URL_DATA_TEST_UK, {
-            method: "POST",
-            header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({action: 1})
-        })
-            .then((response) => {
-                return response.json().then((data) => {
-                    return data;
-                })
-            })
-
-
-    }
-    responseDataTest().then((data) => {
-        /*console.log(data.stages);
-        console.log(data.questions);
-        console.log(data.answers);*/
-    })
-
-
-
+    localStorage.setItem('route-student', 'greetings');
+    const value = useSelector(state => state.testData)
+    console.log(value.data.stages)
     return (
         <Container fixed>
-            <StackStages/>
+            <StackStages />
             <Header/>
             <Animation/>
-            <Question/>
+            <Question />
             <ChooseButton/>
         </Container>
     )
