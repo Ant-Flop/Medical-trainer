@@ -1,52 +1,24 @@
 
+const UPDATE_TEST_DATA = "UPDATE-TEST-DATA";
+
 const defaultState = {
-    questions: [
-        /*{
-            id: 0,
-            number: 0,
-            stage: "Стадія 0",
-            question: "-\tПривіт! Я – Ганнуся, та щось мені недобре. В мене другий день лихоманка, " +
-                      "а ще з’явилися якісь рожеві плями. А як голова болить, ууу…  Я захворіла, так?",
-            answerRight: "- Схоже, що в тебе вітрянка.",
-            answerWrong: {
-                first: "- Мабуть, це кір.",
-                second: "- Схоже, що в тебе ОРВІ. Тобто простуда!"
-            }
-        },
-        {
-            id: 1,
-            number: 1,
-            stage: "Стадія 1а+",
-            question: "-	Вітрянка? Це дуже небезпечно? А що ж робити?",
-            answerRight: "- Спочатку поміряємо температуру. Ще мені потрібно оглянути ці плями.",
-            answerWrong: {
-                first: "- Хоча, може це й кір, тим більше, що ти кашляєш.",
-                second: ""
-            }
-        },
-        {
-            id: 2,
-            number: 2,
-            stage: "Стадія 1а-",
-            question: "-\tКір? Це дуже небезпечно? А що ж робити?",
-            answerRight: "- Спочатку поміряємо температуру. Ще мені потрібно оглянути ці плями. Можливо, узяти додатково аналізи, бо я не зовсім в цьому впевнений.",
-            answerWrong: {
-                first: "- Це однозначно кір! Усі симптоми вказують на це!",
-                second: ""
-            }
-        },
-        {
-            id: 3,
-            number: 3,
-            stage: "",
-            question: "",
-            answerRight: "",
-            answerWrong: {
-                first: "",
-                second: ""
-            }
-        },*/
+ /*   stages:[
+
+    ],
+    questions:[
+
+    ],
+    answers:[
+
+    ]*/
+    value: 1
+
+}
 
 
-    ]
+export const testDataReducer = (state = defaultState, action) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
 }

@@ -8,21 +8,10 @@ import {TestPage} from "./Components/MainPageStudent/TestPage";
 import {useSelector} from "react-redux";
 
 
-const URL_LOGIN = "http://localhost/medical-trainer/rest-full-api/session-storage.php";
-
 
 function App() {
 
-    const state = useSelector(state => state);
-    fetch(URL_LOGIN, {
-        method: "POST",
-        header: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify({action: 1})
-    })
-        .then(response => response.text())
-        .then()
+    //const state = useSelector(state => state);
 
     const localStorageMethode = (state) => {
         const { user_id, login, name, surname, group, role } = state;
@@ -47,9 +36,7 @@ function App() {
 
     return (
         <div className="App">
-
-            {localStorage.getItem("connect") === "true" ? <><Header/><Routing state={state} /></> : <Combine access={access}/>}
-
+            {localStorage.getItem("connect") === "true" ? <><Header/><Routing /></> : <Combine access={access}/>}
         </div>
     );
 }

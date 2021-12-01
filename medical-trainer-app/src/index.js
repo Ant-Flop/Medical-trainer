@@ -11,9 +11,9 @@ const store = configureStore();
 const rerenderTree = () => {
     ReactDOM.render(
         <Provider store={store}>
-            <Router>
+            {/*<Router>*/}
                 <App/>
-            </Router>
+            {/*</Router>*/}
         </Provider>,
         document.getElementById('root')
     );

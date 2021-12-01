@@ -2,15 +2,16 @@ import React from "react";
 import {Container} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import {Route, Routes} from "react-router";
-import {TestPage} from "./TestPage";
 import Divider from "@mui/material/Divider";
+
+
 
 export const MainPageStudent = () => {
 
     const startTest = () => {
-        localStorage.setItem('route-student', 'start-test');
-        window.location.assign('http://localhost:3000/test-start');
+        localStorage.setItem('route-student', '1');
+        //window.location.assign('http://localhost:3000/test-start');
+        window.location.reload();
     }
 
     return (
@@ -30,9 +31,9 @@ export const MainPageStudent = () => {
                         обираючи вірні засоби та методи лікування. Але пам'ятай - хибні методи призведуть до трагедії!
                         Хай
                         щастить!</p></Box>
-                        <Button variant="contained" onClick={startTest} disableElevation>
-                            Розпочати
-                        </Button>
+                    <Button variant="contained" onClick={startTest} disableElevation>
+                        Розпочати
+                    </Button>
                 </Box>
             </Container>
         </>

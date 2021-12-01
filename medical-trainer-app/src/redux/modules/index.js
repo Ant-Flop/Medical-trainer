@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
-import {routeReducer} from "./RouteReducer"
+import {testDataReducer, updateTestData} from "./TestDataReducer";
 
 export default combineReducers({
-    routeReducer,
+    testDataReducer,
 })

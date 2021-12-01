@@ -3,22 +3,22 @@ import {MainPageStudent} from "./MainPageStudent/MainPageStudent";
 import {MainPageTeacher} from "./MainPageTeacher/MainPageTeacher";
 import {Route, Routes} from "react-router";
 import {TestPage} from "./MainPageStudent/TestPage";
+import {MainPageAdministrator} from "./MainPageAdministrator/MainPageAdministrator";
 
 
-export const Routing = (props) => {
+export const Routing = () => {
     const role = localStorage.getItem('role');
-    console.log(localStorage.getItem("route-student"));
 
 
     if (role === "Administrator")
-        return <MainPageStudent/>
+        return <MainPageAdministrator/>
     else if (role === "Teacher")
         return (<MainPageTeacher/>)
     else if (role === "Student") {
         if (localStorage.getItem("route-student") === "greetings")
-            return (<MainPageStudent state={props.state}/>)
-        else if (localStorage.getItem("route-student") === "start-test")
-            return (<Routes><Route path="/test-start" element={<TestPage/>}/></Routes>);
+            return (<MainPageStudent/>)
+        else if (localStorage.getItem("route-student") === "1")
+            return (<TestPage/>/*<Routes><Route path="/test-start" element={<TestPage/>}/></Routes>*/);
     }
     return <></>
 
