@@ -3,9 +3,8 @@ import {Container} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import {TestPage} from "./TestPage";
-import {useDispatch} from "react-redux";
-import {getTestData, updateTestData} from "../../redux/reducers/TestDataReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {updateTestData} from "../../redux/reducers/TestDataReducer";
 
 const URL_DATA_TEST_UK = "http://localhost/medical-trainer/rest-full-api/test-data/test-data-uk.php";
 
@@ -26,17 +25,11 @@ export const MainPageStudent = (props) => {
                         return data;
                     })
                 })
-
-
         }
         responseDataTest().then((data) => {
-            dispatch(updateTestData(data))
-            //console.log(data)
+            dispatch(updateTestData(data));
             props.rerender();
         })
-        //window.location.assign('http://localhost:3000/test-start');
-        //window.location.reload();
-
     }
 
     return (

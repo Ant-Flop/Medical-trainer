@@ -18,7 +18,7 @@ $animations = array();
 
 $result = $mysqli->query("SELECT * FROM uk_stages");
 while($row = $result->fetch_assoc()){
-    array_push($stages, ['id' => $row['id'], 'stage' => $row['stage']]);
+    array_push($stages, ['id' => $row['id'], 'stage' => $row['stage'], 'state_stages' => $row['state_stage']]);
 }
 
 $result = $mysqli->query("SELECT * FROM uk_questions");
@@ -31,12 +31,6 @@ while($row = $result->fetch_assoc()){
     array_push($answers, ['id' => $row['id'], 'text_answer' => $row['text_answer'],
         'status' => $row['status'], 'question_uk_id' => $row['question_uk_id'], 'stage_uk_id' => $row['stage_uk_id'], 'next_stage_uk_id' => $row['next_stage_uk_id']]);
 }
-
-/*$result = $mysqli->query("SELECT * FROM uk_stages");
-while($row = $result->fetch_assoc()){
-    array_push($stages, ['id' => $row['id'], 'stage' => $row['stage']]);
-}*/
-
 
 $json = [
     "stages" => $stages,

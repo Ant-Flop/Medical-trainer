@@ -1,7 +1,23 @@
 const UPDATE_PROGRESS_STUDENT = "UPDATE_PROGRESS_STUDENT";
 
 const defaultState = {
-
+    progress: [
+        {
+            id: "",
+            current_stage_name: "",
+            current_stage_id: "",
+            question_text: "",
+            question_id: "",
+            answers: []
+        }
+    ],
+    status: "",
+    result: {
+        user_id: "",
+        testResult: "",
+        stage_id: "",
+        datetime: ""
+    }
 }
 
 export const progressStudentReducer = (state = defaultState, action) => {

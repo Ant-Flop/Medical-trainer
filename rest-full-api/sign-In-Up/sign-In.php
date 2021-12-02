@@ -27,7 +27,7 @@ if ($result = $mysqli->prepare("SELECT users.login as login, users.password as p
         $data_key = $data['password'];
         if (password_verify($password, $data_key)) {
             $json = json_encode(array('connect' => true, 'login' => $data['login'], 'name' => $data['name'],
-                'surname' => $data['surname'], 'group_name' => $data['group_name'], 'user_id' => $data['user_id'], 'id_role' => $data['role_id'], 'role' => $data['role']));
+                'surname' => $data['surname'], 'group' => $data['group_name'], 'user_id' => $data['user_id'], 'id_role' => $data['role_id'], 'role' => $data['role']));
             $_SESSION['user'] = "qwewqe";
             echo $json;
         } else {

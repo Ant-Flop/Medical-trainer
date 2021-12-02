@@ -4,8 +4,7 @@ import Divider from "@mui/material/Divider";
 export const Question = (props) => {
     return (
         <><Divider variant="fullWidth"/>
-            <h4>Вопрос</h4>
-            {/*<div>{props.questions}</div>*/}
+            {props.questionText}
             <Divider variant="fullWidth"/></>
     )
 }
