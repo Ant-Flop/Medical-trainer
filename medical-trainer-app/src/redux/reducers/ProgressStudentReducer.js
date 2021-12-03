@@ -8,6 +8,8 @@ const defaultState = {
             current_stage_id: "",
             question_text: "",
             question_id: "",
+            animations:[
+            ],
             answers: []
         }
     ],

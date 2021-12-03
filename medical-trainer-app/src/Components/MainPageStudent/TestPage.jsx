@@ -20,6 +20,17 @@ export const TestPage = (props) => {
                 progressStudentData.progress[i].current_stage_name = testData.data.stages[i].stage;
                 progressStudentData.progress[i].question_id = testData.data.questions[i].id;
                 progressStudentData.progress[i].question_text = testData.data.questions[i].text_question;
+                for(let j = 0; j < testData.data.animations.length; j++) {
+                    let animationsCurrentStage = {
+                        animation_id: "",
+                        animation_nameFile: "",
+                    }
+                    if(testData.data.stages[i].id === testData.data.animations[j].stage_uk_id) {
+                        animationsCurrentStage.animation_id = testData.data.animations[j].id;
+                        animationsCurrentStage.animation_nameFile = testData.data.animations[j].name_file;
+                        progressStudentData.progress[i].animations.push(animationsCurrentStage);
+                    }
+                }
                 for(let j = 0; j < testData.data.answers.length; j++){
                     let answersCurrentStage = {
                         answer_id: "",
@@ -53,7 +64,7 @@ export const TestPage = (props) => {
         <Container fixed>
             <StackStages />
             <Header/>
-            <Animation/>
+            <Animation animations={currentProgress.animations}/>
             <Question questionId={currentProgress.question_id} questionText={currentProgress.question_text}/>
             <ChooseButton progress={currentProgress} rerender={props.rerender}/>
         </Container>

@@ -1,9 +1,7 @@
 const UPDATE_TEST_DATA = "UPDATE_TEST_DATA";
 
 const defaultState = {
-    /*stages: [],
-    questions: [],
-    answers: []*/
+
 }
 
 

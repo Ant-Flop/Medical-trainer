@@ -32,10 +32,17 @@ while($row = $result->fetch_assoc()){
         'status' => $row['status'], 'question_uk_id' => $row['question_uk_id'], 'stage_uk_id' => $row['stage_uk_id'], 'next_stage_uk_id' => $row['next_stage_uk_id']]);
 }
 
+$result = $mysqli->query("SELECT * FROM animations");
+while($row = $result->fetch_assoc()){
+    array_push($animations, ['id' => $row['id'], 'name_file' => $row['name_file'],
+        'stage_uk_id' => $row['stage_uk_id']]);
+}
+
 $json = [
     "stages" => $stages,
     "questions" => $questions,
-    "answers" => $answers
+    "answers" => $answers,
+    "animations" => $animations
 ];
 echo json_encode($json);
 

@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import {useSelector} from "react-redux";
 import moment from "moment";
+import Paper from "@mui/material/Paper";
 
 export const ChooseButton = (props) => {
     const progressStudentData = useSelector(state => state.progressStudentTest);
@@ -58,7 +59,7 @@ export const ChooseButton = (props) => {
         progressStudentData.progress.push(progressCurrentStage);
         progressStudentData.status = stageStatus;
         localStorage.setItem('route-student', 'start-test');
-        if(progressStudentData.status === "result"){
+        if (progressStudentData.status === "result") {
             progressStudentData.result.user_id = localStorage.getItem("user_id");
             progressStudentData.result.testResult = progressStudentData.progress[progressStudentData.progress.length - 1].current_stage_name;
             progressStudentData.result.stage_id = progressStudentData.progress[progressStudentData.progress.length - 1].current_stage_id;
@@ -68,28 +69,29 @@ export const ChooseButton = (props) => {
         props.rerender();
     }
     const itemButton = (id, text, nextStageId) => {
-        return (<Button id={id} key={id} onClick={itemButtonClick.bind(this, nextStageId)}>{text}</Button>)
+        return (<Button id={id} key={id} style={{backgroundColor: "#ebeeff"}} onClick={itemButtonClick.bind(this, nextStageId)}>{text}</Button>)
     }
     const itemsButtonArray = props.progress.answers.map(button => itemButton(button.answer_id, button.answer_text, button.next_stage_id))
 
     return (
         <div>
-            <Divider variant="fullWidth"/>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    '& > *': {
-                        m: 1,
-                    },
-                }}
-            >
-                <ButtonGroup variant="text" aria-label="text button group">
-                    {itemsButtonArray}
-                </ButtonGroup>
-            </Box>
-            <Divider variant="fullWidth"/>
+            <Paper>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        padding: 3,
+                        alignItems: 'center',
+                        '& > *': {
+                            m: 1,
+                        },
+                    }}
+                >
+                    <ButtonGroup  variant="outlined" aria-label="outlined primary button group">
+                        {itemsButtonArray}
+                    </ButtonGroup>
+                </Box>
+            </Paper>
         </div>
     )
 }
