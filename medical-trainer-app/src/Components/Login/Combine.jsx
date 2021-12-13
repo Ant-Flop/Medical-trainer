@@ -45,15 +45,16 @@ export const Combine = (props) => {
                 sm={4}
                 md={7}
                 sx={{
-                    backgroundImage: 'url(https://medcentr.dp.ua/wp-content/uploads/2021/07/microbes-1920x1080.jpg)',
+                    backgroundImage: 'url(http://u118049.test-handyhost.ru/images/login-image.svg)',
                     backgroundRepeat: 'no-repeat',
                     backgroundColor: (t) =>
-                        t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                        t.palette.mode === 'black' ? t.palette.grey[50] : t.palette.grey[900],
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                 }}
             />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+
                 <Box
                     sx={{
                         my: 8,
@@ -70,15 +71,15 @@ export const Combine = (props) => {
                         onChange={handleChange}
                         aria-label="disabled tabs example"
                     >
-                        <Tab label="Sign In"/>
+                        <Tab label="Увійти"/>
 
-                        <Tab label="Sign Up"/>
+                        <Tab label="Реєстрація"/>
                     </Tabs>
                     <TabPanel value={value} index={0}>
-                        <SignIn handleChange={handleChange} access={props.access}/>
+                        <SignIn handleChange={handleChange} access={props.access} rerender={props.rerender}/>
                     </TabPanel>
-                    <TabPanel value={value} index={1}>
-                        <SignUp/>
+                    <TabPanel value={value}  index={1}>
+                        <SignUp rerender={props.rerender}/>
                     </TabPanel>
 
 

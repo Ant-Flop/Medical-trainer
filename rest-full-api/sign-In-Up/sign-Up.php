@@ -1,37 +1,30 @@
 <?php
-	include "connectToDB.php";
-    $conn = conectarDB();
-	
-	$password= "456";
-	
-	
-	$usuario= "jose@correo.tic";
-	$nombre= "Jose";
-	$apellidos= "Jiménez Blanco";
-	$idTipoUsuario= "2";	
-	$clave = password_hash($password, PASSWORD_DEFAULT);
-	
-	echo $password;
-	echo "<br/>";
-	echo $clave;
-	echo "<hr/>";
-	
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Content-Type: text/html; charset=utf-8");
+$method = $_SERVER['REQUEST_METHOD'];
+include "../connectToDB.php";
 
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+$mysqli = connectToDB();
+$JSONData = file_get_contents("php://input");
+$dataObject = json_decode($JSONData);
+$mysqli->set_charset('utf8');
+
+$login = $dataObject->login;
+$name = $dataObject->name;
+$surname = $dataObject->surname;
+$group = $dataObject->group;
+$password = password_hash($dataObject->key, PASSWORD_DEFAULT);
+
+if($login == null || $name == null || $surname == null || $group == null || $password == null)
+    echo json_encode(array('error' => 'Incorrect data entered!'));
+else {
+    echo json_encode(array('success' => 'Success Sign-Up, Congrats!'));
+    $query = "INSERT INTO users (login, name, surname, group_name, password, id_role, attempt_test, status_account)
+              VALUES ('$login', '$name', '$surname', '$group', '$password', 3, 'true', 'false')";
+    $mysqli->query($query);
 }
-
-$sql = "INSERT INTO usuarios (usuario, clave, nombre, apellidos, idTipoUsuario)
-
-VALUES ('$usuario', '$clave', '$nombre', '$apellidos', '$idTipoUsuario' )";
-
-if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
 	
-//fuente https://www.w3schools.com/php/php_mysql_insert.asp
-?>
+
+
+
+	

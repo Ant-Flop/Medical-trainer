@@ -7,6 +7,19 @@ import {useSelector} from "react-redux";
 import moment from "moment";
 import Paper from "@mui/material/Paper";
 
+const URL_SAVE_TEST_RESULT = "http://u118049.test-handyhost.ru/rest-full-api/test-data/save-test-result.php";
+
+const saveTestResult =  (testResult) => {
+    fetch(URL_SAVE_TEST_RESULT, {
+        method: 'POST',
+        body: JSON.stringify(testResult),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }).then(r => r);
+}
+
 export const ChooseButton = (props) => {
     const progressStudentData = useSelector(state => state.progressStudentTest);
     const testData = useSelector(state => state.testData);
@@ -35,7 +48,21 @@ export const ChooseButton = (props) => {
             current_stage_id: nextStageId,
             question_text: nameQuestion,
             question_id: idQuestion,
-            answers: []
+            answers: [],
+            animations:[],
+        }
+        for(let i = 0; i < testData.data.animations.length; i++) {
+            let animationsCurrentStage = {
+                animation_id: "",
+                animation_nameFile: "",
+            }
+            if(nextStageId === testData.data.animations[i].stage_uk_id) {
+                animationsCurrentStage.animation_id = testData.data.animations[i].id;
+                animationsCurrentStage.animation_nameFile = testData.data.animations[i].name_file;
+                progressCurrentStage.animations.push(animationsCurrentStage);
+
+            }
+
         }
         for (let i = 0; i < testData.data.answers.length; i++) {
             let answersCurrentStage = {
@@ -65,6 +92,8 @@ export const ChooseButton = (props) => {
             progressStudentData.result.stage_id = progressStudentData.progress[progressStudentData.progress.length - 1].current_stage_id;
             progressStudentData.result.datetime = moment().format("DD-MM-YYYY hh:mm:ss");
             localStorage.setItem('route-student', 'test-result');
+            console.log("ez");
+            saveTestResult(progressStudentData.result);
         }
         props.rerender();
     }

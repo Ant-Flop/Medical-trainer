@@ -14,7 +14,7 @@ export const Routing = (props) => {
     if (role === "Administrator")
         return <MainPageAdministrator/>
     else if (role === "Teacher")
-        return (<MainPageTeacher/>)
+        return (<MainPageTeacher rerender={props.rerender}/>)
     else if (role === "Student") {
         if (localStorage.getItem("route-student") === "greetings")
             return (<MainPageStudent rerender={props.rerender}/>)

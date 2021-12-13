@@ -8,14 +8,13 @@ include "../connectToDB.php";
 $mysqli = connectToDB();
 $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
-session_start();
 $mysqli->set_charset('utf8');
 
 $user = $dataObject->user;
 $password = $dataObject->key;
 
 if ($result = $mysqli->prepare("SELECT users.login as login, users.password as password, users.name as name, 
-                                             users.surname as surname, users.group_name as group_name, users.id as user_id, 
+                                             users.surname as surname, users.group_name as group_name, users.status_account as status_account, users.id as user_id, 
                                              roles.role as role, roles.description as role_description, roles.id as role_id 
                                       FROM users 
                                       INNER JOIN roles ON users.id_role = roles.id WHERE login = ?")) {
@@ -26,10 +25,14 @@ if ($result = $mysqli->prepare("SELECT users.login as login, users.password as p
         $data = $get_result->fetch_assoc();
         $data_key = $data['password'];
         if (password_verify($password, $data_key)) {
-            $json = json_encode(array('connect' => true, 'login' => $data['login'], 'name' => $data['name'],
-                'surname' => $data['surname'], 'group' => $data['group_name'], 'user_id' => $data['user_id'], 'id_role' => $data['role_id'], 'role' => $data['role']));
-            $_SESSION['user'] = "qwewqe";
-            echo $json;
+            if($data['status_account'] == "false"){
+                echo json_encode(array('connect' => false, 'error' => 'Account not activate!'));
+            } else {
+                echo json_encode(array('connect' => true, 'login' => $data['login'], 'name' => $data['name'],
+                    'surname' => $data['surname'], 'group' => $data['group_name'], 'status_account' => $data['status_account'],
+                    'user_id' => $data['user_id'], 'id_role' => $data['role_id'], 'role' => $data['role']));
+            }
+
         } else {
 
             echo json_encode(array('connect' => false, 'error' => 'Wrong password or login!'));

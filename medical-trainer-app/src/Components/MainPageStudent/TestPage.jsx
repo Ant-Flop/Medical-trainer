@@ -29,7 +29,9 @@ export const TestPage = (props) => {
                         animationsCurrentStage.animation_id = testData.data.animations[j].id;
                         animationsCurrentStage.animation_nameFile = testData.data.animations[j].name_file;
                         progressStudentData.progress[i].animations.push(animationsCurrentStage);
+
                     }
+
                 }
                 for(let j = 0; j < testData.data.answers.length; j++){
                     let answersCurrentStage = {
@@ -59,14 +61,14 @@ export const TestPage = (props) => {
         return progressStudentData.progress[progressStudentData.progress.length - 1];
     }
     const currentProgress = setProgressData();
-
+    //console.log(currentProgress.animations);
     return (
         <Container fixed>
-            <StackStages />
+            {/*<StackStages />*/}
             <Header/>
-            <Animation animations={currentProgress.animations}/>
+            <Animation animations={currentProgress.animations} rerender={props.rerender}/>
             <Question questionId={currentProgress.question_id} questionText={currentProgress.question_text}/>
-            <ChooseButton progress={currentProgress} rerender={props.rerender}/>
+            <ChooseButton progress={currentProgress} rerender={props.rerender} animations={currentProgress.animations}/>
         </Container>
     )
 }

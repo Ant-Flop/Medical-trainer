@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Container} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -6,31 +6,60 @@ import Divider from "@mui/material/Divider";
 import {useDispatch, useSelector} from "react-redux";
 import {updateTestData} from "../../redux/reducers/TestDataReducer";
 import Paper from "@mui/material/Paper";
+import Alert from "@mui/material/Alert";
 
-const URL_DATA_TEST_UK = "http://localhost/medical-trainer/rest-full-api/test-data/test-data-uk.php";
+const URL_DATA_TEST_UK = "http://u118049.test-handyhost.ru/rest-full-api/test-data/test-data-uk.php";
+const URL_STATUS_ATTEMPT = "http://u118049.test-handyhost.ru/rest-full-api/test-data/status-attempt.php";
+
+const checkStatusAttempt = async (jsonId) => {
+    const response = await fetch(URL_STATUS_ATTEMPT, {
+        method: 'POST',
+        body: JSON.stringify(jsonId),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    });
+    return await response.json();
+}
 
 export const MainPageStudent = (props) => {
     const dispatch = useDispatch();
+    const [info, setInfo] = useState(null);
     const startTest = () => {
-        localStorage.setItem('route-student', 'start-test');
-        const responseDataTest = () => {
-            return fetch(URL_DATA_TEST_UK, {
-                method: "POST",
-                header: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: JSON.stringify({action: 1})
-            })
-                .then((response) => {
-                    return response.json().then((data) => {
-                        return data;
-                    })
-                })
+        const jsonId = {
+            "user_id": localStorage.getItem("user_id")
         }
-        responseDataTest().then((data) => {
-            dispatch(updateTestData(data));
-            props.rerender();
-        })
+        let attempt_test = "false";
+        checkStatusAttempt(jsonId).then(resp => {
+            attempt_test = resp.attempt_test;
+            if(attempt_test === "true"){
+                localStorage.setItem('route-student', 'start-test');
+                const responseDataTest = () => {
+                    return fetch(URL_DATA_TEST_UK, {
+                        method: "POST",
+                        header: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: JSON.stringify({action: 1})
+                    })
+                        .then((response) => {
+                            return response.json().then((data) => {
+                                return data;
+                            })
+                        })
+                }
+                responseDataTest().then((data) => {
+                    dispatch(updateTestData(data));
+                    props.rerender();
+                })
+            }
+            else if(attempt_test === "false") {
+                setInfo(attempt_test);
+            }
+        });
+
+
     }
 
     return (
@@ -63,7 +92,10 @@ export const MainPageStudent = (props) => {
                     <Button variant="contained" style={{margin: "15px 0 0 0 ", backgroundColor: "#414c93"}}
                             onClick={startTest} disableElevation>
                         Розпочати
-                    </Button>
+                    </Button><p/>
+
+                    {info &&
+                    <Alert severity="info">Закінчились спроби пройти тест</Alert>}
                 </Box>
             </Container>
         </>

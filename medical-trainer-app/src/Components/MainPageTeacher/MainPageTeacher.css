@@ -1,0 +1,14 @@
+.MuiDataGrid-cell {
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+#simple-tabpanel-0 {
+    width: -webkit-fill-available;
+    max-width: 150vh;
+}
+
+#simple-tabpanel-1 {
+    width: -webkit-fill-available;
+    max-width: 150vh;
+}

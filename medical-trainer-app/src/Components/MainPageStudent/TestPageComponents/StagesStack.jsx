@@ -25,7 +25,10 @@ export const StackStages = () => {
                 divider={<Divider orientation="vertical" style={{margin: "0"}} flexItem />}
                 spacing={2}
             >
-                <Paper className={stage}>Stage 1</Paper><Paper className={stage}>Stage 1</Paper>
+                <Paper className={stage}>Stage 1</Paper>
+                <Paper className={stage}>Stage 2</Paper>
+                <Paper className={stage}>Stage 3</Paper>
+                <Paper className={stage}>Stage 4</Paper>
             </Stack>
             <Divider variant="fullWidth"/>
         </div>
